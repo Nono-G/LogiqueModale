@@ -1,5 +1,7 @@
 package main;
 
+import Expr.*;
+
 public class Parse {
 	
 	public static final int TAILLE_PILE = 150;
@@ -7,15 +9,19 @@ public class Parse {
 	 * NON !
 	 * ET ^
 	 * OU +
-	 * IMPLIQUE -
+	 * IMPLIQUE >
 	 * CARRE (NECESSITE) #
 	 * (LOSANGE) *
 	 */
-	public static final char[] operandesStandard = {'!','^','+','-','#','*'};
+	public static final char[] operandesStandard = {'!','^','+','>','#','*'};
 	
 	public static void main (String[] args){
 		System.out.println("D");
-		System.out.println(infixeToPrefixe("(a^(a-b))-b", operandesStandard));
+		String prefixe = infixeToPrefixe("(a^(a>b))>b", operandesStandard);
+		System.out.println(prefixe);
+		Expr ex = constr(prefixe);
+		System.out.println(ex);
+		System.out.println(ex.toStringInfixe());
 		System.out.println("F");
 	}
 	
@@ -108,29 +114,63 @@ public class Parse {
 		return true;
 	}
 	
-	public static ConstrRet constr0(String expr, int d){
+	public static Expr constr(String expr){
+		ConstrRet c = constr0(expr, 0);
+		return c.e;
+	}
+	
+	private static ConstrRet constr0(String expr, int d){
 		char c = expr.charAt(d);
 		Expr e;
 		int nd;
+		ConstrRet cr;
 		switch(c){
-		case '!':
+		case '!': //NON
+			e = new NonExpr();
+			cr = constr0(expr, d+1);
+			((Op1Expr)e).membre = cr.e;
+			nd = 1+cr.n;
+			break;
+		case '^': // ET
 			e = new EtExpr();
-			ConstrRet cr = constr0(expr, d+1);
-			((EtExpr)e).membre1 = cr.e;
+			cr = constr0(expr, d+1);
+			((Op2Expr)e).membre1 = cr.e;
 			nd = 1+cr.n;
 			cr = constr0(expr, d+cr.n+1);
-			((EtExpr)e).membre2 = cr.e;
+			((Op2Expr)e).membre2 = cr.e;
 			nd+= cr.n;
 			break;
-		/*case '^':
+		case '+': //OU
+			e = new OuExpr();
+			cr = constr0(expr, d+1);
+			((Op2Expr)e).membre1 = cr.e;
+			nd = 1+cr.n;
+			cr = constr0(expr, d+cr.n+1);
+			((Op2Expr)e).membre2 = cr.e;
+			nd+= cr.n;
 			break;
-		case '+':
+		case '>': //IMPLIQUE
+			e = new ImplExpr();
+			cr = constr0(expr, d+1);
+			((Op2Expr)e).membre1 = cr.e;
+			nd = 1+cr.n;
+			cr = constr0(expr, d+cr.n+1);
+			((Op2Expr)e).membre2 = cr.e;
+			nd+= cr.n;
 			break;
-		case '-':
+		case '#': //CARRE
+			e = new CarreExpr();
+			cr = constr0(expr, d+1);
+			((Op1Expr)e).membre = cr.e;
+			nd = 1+cr.n;
 			break;
-		case '#':
-			break;*/
-		default :
+		case '*': //LOSANGE
+			e = new LosangeExpr();
+			cr = constr0(expr, d+1);
+			((Op1Expr)e).membre = cr.e;
+			nd = 1+cr.n;
+			break;
+		default : //VAR
 			e = new Var();
 			((Var)e).nom = ""+c;
 			nd = 1;
@@ -141,7 +181,7 @@ public class Parse {
 		 * NON !
 		 * ET ^
 		 * OU +
-		 * IMPLIQUE -
+		 * IMPLIQUE >
 		 * CARRE (NECESSITE) #
 		 * (LOSANGE) *
 		 */

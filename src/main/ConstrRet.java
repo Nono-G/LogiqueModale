@@ -1,5 +1,7 @@
 package main;
 
+import Expr.Expr;
+
 public class ConstrRet {
 	public int n;
 	public Expr e;
