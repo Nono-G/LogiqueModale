@@ -1,4 +1,4 @@
-package Expr;
+package exprs;
 
 public class LosangeExpr extends Op1Expr{
 

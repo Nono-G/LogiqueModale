@@ -1,4 +1,4 @@
-package Expr;
+package exprs;
 
 public class Var extends Expr{
 	public String nom;

@@ -1,4 +1,4 @@
-package Expr;
+package exprs;
 
 public abstract class Op2Expr extends ExprOp{
 	public Expr membre1;
@@ -10,6 +10,6 @@ public abstract class Op2Expr extends ExprOp{
 	}
 	
 	public String toStringInfixe(){
-		return "("+membre1.toStringInfixe()+" "+this.op+" "+membre2.toStringInfixe()+")";
+		return "("+membre1.toStringInfixe()+""+this.op+""+membre2.toStringInfixe()+")";
 	}
 }

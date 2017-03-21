@@ -1,6 +1,6 @@
 package main;
 
-import Expr.Expr;
+import exprs.Expr;
 
 public class ConstrRet {
 	public int n;

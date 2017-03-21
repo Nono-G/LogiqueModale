@@ -1,4 +1,4 @@
-package Expr;
+package exprs;
 
 public abstract class Op1Expr extends ExprOp{
 	public Expr membre;

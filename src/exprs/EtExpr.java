@@ -1,4 +1,4 @@
-package Expr;
+package exprs;
 
 public class EtExpr extends Op2Expr{
 
