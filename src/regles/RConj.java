@@ -5,6 +5,7 @@ import java.util.List;
 
 import demonstrateur.Assertion;
 import demonstrateur.AssertionSat;
+import demonstrateur.Tableau;
 import exprs.*;
 
 public class RConj extends Regle {
@@ -41,6 +42,12 @@ public class RConj extends Regle {
 			}
 		}
 		return applicable;
+	}
+
+	@Override
+	public boolean assayerAppliquer2(int i, Tableau tab) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }

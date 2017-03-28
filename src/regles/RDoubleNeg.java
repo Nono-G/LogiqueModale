@@ -40,4 +40,17 @@ public class RDoubleNeg extends Regle{
 		}
 		return applicable;
 	}
+
+	@Override
+	public boolean assayerAppliquer2(int i, Tableau tab) {
+		Assertion a = tab.get(i);
+		if(a instanceof AssertionSat
+			&& ((AssertionSat)a).expr instanceof NonExpr
+			&& ((NonExpr)((AssertionSat)a).expr).membre instanceof NonExpr
+			){//DOUBLE NEGATION
+			tab.ajouter(new AssertionSat(a.monde, ((NonExpr)((NonExpr)((AssertionSat)a).expr).membre).membre));
+			return true;
+		}
+		return false;
+	}
 }
