@@ -19,16 +19,6 @@ public class Parse {
 		return constr(infixeToPrefixe(str, operandesStandard));
 	}
 	
-	public static void main (String[] args){
-		System.out.println("D");
-		String prefixe = infixeToPrefixe("(a^(a>b))>b", operandesStandard);
-		System.out.println(prefixe);
-		Expr ex = constr(prefixe);
-		System.out.println(ex);
-		System.out.println(ex.toStringInfixe());
-		System.out.println("F");
-	}
-	
 	public static String infixeToPrefixe(String infixe, char[] operandes){
 		if(! correct(infixe)){
 			throw new RuntimeException("incorrect");

@@ -10,6 +10,6 @@ public class AssertionSat extends Assertion {
 	}
 	
 	public String toString(){
-		return this.monde.toString() + " : " + this.expr.toStringInfixe();
+		return this.monde.toString() + " : "+(this.reagi?"R":" ")+" : "+ this.expr.toStringInfixe();
 	}
 }

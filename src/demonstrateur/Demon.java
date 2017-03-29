@@ -13,17 +13,21 @@ public class Demon {
 		while( ! tab.termine()){
 			reagirTous(tab);
 			if(contradiction(tab)){
-				Debranchement debr = tab.debranche();
+				Debranchement debr = null;
+				while(! tab.termine() && debr == null){
+					debr = tab.debranche();
+				}
 				if(debr != null){
 					debr.regle.essayerAppliquerMembre2(debr.iAssert, tab);
+				}else{
+					return false;
 				}
 			}else{
 				//formule satifaisable ?
 				return true;
 			}
 		}
-		return false;
-		
+		return true;
 	}
 	
 	public static boolean reagirTous(Tableau tab){
@@ -34,7 +38,7 @@ public class Demon {
 			if(!a.reagi){//Si la règle est déjà marquée comme ayant réagi, on la saute
 				for(Regle r : regles){
 					agi = r.essayerAppliquer(i, tab);
-					if(agi){break;}//On ne fait agir qu'une règle
+					if(agi){System.out.println(tab);break;}//On ne fait agir qu'une règle
 				}
 			}
 			i++;
@@ -53,9 +57,9 @@ public class Demon {
 					Assertion a2 = tab.get(j);
 					if(a2.monde.equals(a.monde) &&
 					   a2 instanceof AssertionSat &&
-					   ((AssertionSat)a).expr instanceof NonExpr &&
-					   ((NonExpr)((AssertionSat)a).expr).membre instanceof Var &&
-					   ((Var)((NonExpr)((AssertionSat)a).expr).membre).nom.equals(((Var)((AssertionSat)a).expr).nom)
+					   ((AssertionSat)a2).expr instanceof NonExpr &&
+					   ((NonExpr)((AssertionSat)a2).expr).membre instanceof Var &&
+					   ((Var)((NonExpr)((AssertionSat)a2).expr).membre).nom.equals(((Var)((AssertionSat)a).expr).nom)
 					   ){//CONTRADICTION
 						return true;
 					}

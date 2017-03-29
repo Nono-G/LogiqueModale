@@ -12,6 +12,7 @@ public class Tableau {
 	private int branches_pos[];
 	private int branches_assert[];
 	private RegleBranche branches_regle[];
+	private boolean branches_b2[];
 	private int iBranches;
 	
 	public Tableau(){
@@ -21,23 +22,26 @@ public class Tableau {
 		this.branches_pos = new int[TAILLE_PILE_BRANCHES];
 		this.branches_assert = new int[TAILLE_PILE_BRANCHES];
 		this.branches_regle = new RegleBranche[TAILLE_PILE_BRANCHES];
+		this.branches_b2 = new boolean[TAILLE_PILE_BRANCHES];
 		this.branches_pos[0] = 0;
 		this.branches_assert[0] = 0;
 		this.branches_regle[0] = null;
+		this.branches_b2[0] = false;
 		this.iBranches = 1;
 	}
 	
-	public void branche(int i, RegleBranche r){
+	public void branche(int i, RegleBranche r, boolean b2from){
 		this.branches_pos[iBranches] = iAssert;
 		this.branches_assert[iBranches] = i;
 		this.branches_regle[iBranches] = r;
+		this.branches_b2[iBranches] = b2from;
 		this.iBranches ++;
 	}
 	
 	public Debranchement debranche(){
 		this.iBranches--;
 		this.iAssert = this.branches_pos[iBranches];
-		if(termine()){
+		if(termine() || ! this.branches_b2[iBranches]){
 			return null;
 		}else{
 			Debranchement debr = new Debranchement(branches_assert[iBranches], branches_regle[iBranches]);

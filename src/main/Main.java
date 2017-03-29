@@ -7,13 +7,9 @@ public class Main {
 
 	public static void main(String[] args) {
 		//Expr e = Parse.parse(args[1]);
-		Expr e = Parse.parse("((!(!(a)))^(!(a)))");
+		Expr e = Parse.parse("(((!(!(a)))^(!(a)))+((!(!(b)))^(!(b))))");
 		System.out.println(e);
 		Tableau t = new Tableau();
-		Monde m = new Monde();
-		Monde m2 = new Monde();
-		System.out.println(m);
-		System.out.println(m2);
 		AssertionSat a = new AssertionSat(new Monde(), e);
 		t.ajouter(a);
 		System.out.println(t);

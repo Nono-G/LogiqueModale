@@ -10,7 +10,7 @@ public class RDisj extends RegleBranche {
 		Assertion a = tab.get(i);
 		if(a instanceof AssertionSat
 		   && ((AssertionSat)a).expr instanceof OuExpr){
-			tab.branche(i, this);
+			tab.branche(i, this, false);
 			tab.ajouter(new AssertionSat(a.monde, ((OuExpr)((AssertionSat)a).expr).membre2));
 			return true;
 		}
@@ -23,7 +23,7 @@ public class RDisj extends RegleBranche {
 		if(a instanceof AssertionSat
 		   && ((AssertionSat)a).expr instanceof OuExpr){
 			a.reagi = true;
-			tab.branche(i, this);
+			tab.branche(i, this, true);
 			tab.ajouter(new AssertionSat(a.monde, ((OuExpr)((AssertionSat)a).expr).membre1));
 			return true;
 		}
