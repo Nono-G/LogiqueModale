@@ -15,6 +15,10 @@ public class Parse {
 	 */
 	public static final char[] operandesStandard = {'!','^','+','>','#','*'};
 	
+	public static Expr parse(String str){
+		return constr(infixeToPrefixe(str, operandesStandard));
+	}
+	
 	public static void main (String[] args){
 		System.out.println("D");
 		String prefixe = infixeToPrefixe("(a^(a>b))>b", operandesStandard);

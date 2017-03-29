@@ -8,8 +8,8 @@ import demonstrateur.AssertionSat;
 import demonstrateur.Tableau;
 import exprs.*;
 
-public class RConj extends Regle {
-
+public class RConj extends RegleSansBranche {
+	/*
 	@Override
 	public boolean applicable(List<Assertion> asserts) {
 		Iterator<Assertion> it = asserts.iterator();
@@ -43,10 +43,17 @@ public class RConj extends Regle {
 		}
 		return applicable;
 	}
-
+	*/
 	@Override
-	public boolean assayerAppliquer2(int i, Tableau tab) {
-		// TODO Auto-generated method stub
+	public boolean essayerAppliquer(int i, Tableau tab) {
+		Assertion a = tab.get(i);
+		if(a instanceof AssertionSat
+		   && ((AssertionSat)a).expr instanceof EtExpr){
+			a.reagi = true;
+			tab.ajouter(new AssertionSat(a.monde,((EtExpr)((AssertionSat)a).expr).membre1));
+			tab.ajouter(new AssertionSat(a.monde,((EtExpr)((AssertionSat)a).expr).membre2));
+			return true;
+		}
 		return false;
 	}
 

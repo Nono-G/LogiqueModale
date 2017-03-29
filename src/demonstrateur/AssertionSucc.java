@@ -8,6 +8,10 @@ public class AssertionSucc extends Assertion {
 		super(m1);
 		this.succ = m2;
 	}
+	
+	public String toString(){
+		return this.monde.toString() + " -> " + this.succ.toString();
+	}
 
 
 }

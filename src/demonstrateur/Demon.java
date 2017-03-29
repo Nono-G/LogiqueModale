@@ -8,18 +8,33 @@ import regles.*;
 public class Demon {
 	
 	public static List<Regle> regles = Factory.getRegles();
-	public static void demontrer(){
+	
+	public static boolean sat(Tableau tab){
+		while( ! tab.termine()){
+			reagirTous(tab);
+			if(contradiction(tab)){
+				Debranchement debr = tab.debranche();
+				if(debr != null){
+					debr.regle.essayerAppliquerMembre2(debr.iAssert, tab);
+				}
+			}else{
+				//formule satifaisable ?
+				return true;
+			}
+		}
+		return false;
 		
 	}
 	
 	public static boolean reagirTous(Tableau tab){
 		int i = 0;
+		boolean agi = false;
 		while(i < tab.iAssert){
 			Assertion a = tab.asserts[i];
 			if(!a.reagi){//Si la règle est déjà marquée comme ayant réagi, on la saute
 				for(Regle r : regles){
-					r.assayerAppliquer2(i, tab);
-					//DETECTER LES BRANCHES
+					agi = r.essayerAppliquer(i, tab);
+					if(agi){break;}//On ne fait agir qu'une règle
 				}
 			}
 			i++;
@@ -32,10 +47,10 @@ public class Demon {
 		while(i < tab.iAssert){//Parcourir les assertions
 			Assertion a = tab.get(i);
 			if(a instanceof AssertionSat && ((AssertionSat)a).expr instanceof Var){
-				//Un littéral positif
+				//a Un littéral positif
 				int j = 0;
-				while(j < tab.iAssert){
-					Assertion a2 = tab.get(i);
+				while(j < tab.iAssert){//Parcourir les assertions pour trouver le littéral negatif
+					Assertion a2 = tab.get(j);
 					if(a2.monde.equals(a.monde) &&
 					   a2 instanceof AssertionSat &&
 					   ((AssertionSat)a).expr instanceof NonExpr &&

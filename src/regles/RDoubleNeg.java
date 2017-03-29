@@ -5,8 +5,8 @@ import java.util.List;
 import exprs.*;
 import demonstrateur.*;
 
-public class RDoubleNeg extends Regle{
-
+public class RDoubleNeg extends RegleSansBranche{
+	/*
 	@Override
 	public boolean applicable(List<Assertion> asserts) {
 		Iterator<Assertion> it = asserts.iterator();
@@ -40,14 +40,15 @@ public class RDoubleNeg extends Regle{
 		}
 		return applicable;
 	}
-
+	*/
 	@Override
-	public boolean assayerAppliquer2(int i, Tableau tab) {
+	public boolean essayerAppliquer(int i, Tableau tab) {
 		Assertion a = tab.get(i);
 		if(a instanceof AssertionSat
 			&& ((AssertionSat)a).expr instanceof NonExpr
 			&& ((NonExpr)((AssertionSat)a).expr).membre instanceof NonExpr
 			){//DOUBLE NEGATION
+			a.reagi = true;
 			tab.ajouter(new AssertionSat(a.monde, ((NonExpr)((NonExpr)((AssertionSat)a).expr).membre).membre));
 			return true;
 		}

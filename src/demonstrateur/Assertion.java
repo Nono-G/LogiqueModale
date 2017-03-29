@@ -8,4 +8,6 @@ public abstract class Assertion {
 		this.monde=m;
 		this.reagi= false;
 	}
+	
+	public abstract String toString();
 }

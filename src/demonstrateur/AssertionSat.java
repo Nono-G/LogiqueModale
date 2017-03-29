@@ -8,4 +8,8 @@ public class AssertionSat extends Assertion {
 		super(m);
 		this.expr = e;
 	}
+	
+	public String toString(){
+		return this.monde.toString() + " : " + this.expr.toStringInfixe();
+	}
 }

@@ -1,7 +1,27 @@
 package main;
 
-public class Demon {
+import exprs.*;
+import demonstrateur.*;
 
+public class Main {
+
+	public static void main(String[] args) {
+		//Expr e = Parse.parse(args[1]);
+		Expr e = Parse.parse("((!(!(a)))^(!(a)))");
+		System.out.println(e);
+		Tableau t = new Tableau();
+		Monde m = new Monde();
+		Monde m2 = new Monde();
+		System.out.println(m);
+		System.out.println(m2);
+		AssertionSat a = new AssertionSat(new Monde(), e);
+		t.ajouter(a);
+		System.out.println(t);
+		boolean sat = Demon.sat(t);
+		System.out.println(sat);
+	}
+	
+	/*
 	public static void main(String[] args) {
 		String infixeExpr = args[0];
 		infixeExpr = infixeExpr.replace(" ","");
@@ -25,4 +45,6 @@ public class Demon {
 		}
 		return res;
 	}
+	*/
+
 }
