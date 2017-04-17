@@ -39,6 +39,13 @@ public class Tableau {
 	}
 	
 	public Debranchement debranche(){
+		int i = 0;
+		while(i<this.iAssert){
+			if(this.asserts[i].reagi >= iBranches) {
+				this.asserts[i].reagi = 0;
+			}
+			i++;
+		}
 		this.iBranches--;
 		this.iAssert = this.branches_pos[iBranches];
 		if(termine() || ! this.branches_b2[iBranches]){
@@ -73,12 +80,14 @@ public class Tableau {
 		while( x < this.iAssert){
 			if(x == this.branches_pos[y]){
 				y++;
-				str += "    |\n    |\n";
+				str += "    |\n";
 			}
 			str += this.asserts[x].toString()+"\n";
 			x++;
 		}
 		return str+"***       ***";
 	}
+
+	public int getiBranches(){return this.iBranches;}
 	
 }

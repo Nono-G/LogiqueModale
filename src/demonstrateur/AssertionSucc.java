@@ -13,5 +13,8 @@ public class AssertionSucc extends Assertion {
 		return this.monde.toString() + " -> " + this.succ.toString();
 	}
 
-
+	@Override
+	public boolean estAssertionSucc() {
+		return true;
+	}
 }

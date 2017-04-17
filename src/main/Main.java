@@ -5,15 +5,26 @@ import demonstrateur.*;
 
 public class Main {
 
+/* OPERANDES
+ * NON !
+ * ET ^
+ * OU +
+ * IMPLIQUE >
+ * CARRE (NECESSITE) #
+ * (LOSANGE) *
+ */
 	public static void main(String[] args) {
 		//Expr e = Parse.parse(args[1]);
-		Expr e = Parse.parse("(((!(!(a)))^(!(a)))+((!(!(b)))^(!(b))))");
+		//Expr e = Parse.parse("(((!(!(a)))^(!(a)))+((!(!(b)))^(!(b))))");
+		//Expr e = Parse.parse("((!(a))^(!(a+b)))");
+		//Expr e = Parse.parse("(!((b+(!(a)))^(!(a>b))))");
+		Expr e = Parse.parse("((!(a^b))^(a^b))");
 		System.out.println(e);
 		Tableau t = new Tableau();
 		AssertionSat a = new AssertionSat(new Monde(), e);
 		t.ajouter(a);
 		System.out.println(t);
-		boolean sat = Demon.sat(t);
+		boolean sat = Demon.sat(t, true);
 		System.out.println(sat);
 	}
 	

@@ -22,7 +22,7 @@ public class RDisj extends RegleBranche {
 		Assertion a = tab.get(i);
 		if(a instanceof AssertionSat
 		   && ((AssertionSat)a).expr instanceof OuExpr){
-			a.reagi = true;
+			a.reagi = tab.getiBranches();
 			tab.branche(i, this, true);
 			tab.ajouter(new AssertionSat(a.monde, ((OuExpr)((AssertionSat)a).expr).membre1));
 			return true;

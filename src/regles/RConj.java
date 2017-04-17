@@ -49,7 +49,7 @@ public class RConj extends RegleSansBranche {
 		Assertion a = tab.get(i);
 		if(a instanceof AssertionSat
 		   && ((AssertionSat)a).expr instanceof EtExpr){
-			a.reagi = true;
+			a.reagi = tab.getiBranches();
 			tab.ajouter(new AssertionSat(a.monde,((EtExpr)((AssertionSat)a).expr).membre1));
 			tab.ajouter(new AssertionSat(a.monde,((EtExpr)((AssertionSat)a).expr).membre2));
 			return true;

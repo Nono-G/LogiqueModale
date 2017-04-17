@@ -48,7 +48,7 @@ public class RDoubleNeg extends RegleSansBranche{
 			&& ((AssertionSat)a).expr instanceof NonExpr
 			&& ((NonExpr)((AssertionSat)a).expr).membre instanceof NonExpr
 			){//DOUBLE NEGATION
-			a.reagi = true;
+			a.reagi = tab.getiBranches();
 			tab.ajouter(new AssertionSat(a.monde, ((NonExpr)((NonExpr)((AssertionSat)a).expr).membre).membre));
 			return true;
 		}
