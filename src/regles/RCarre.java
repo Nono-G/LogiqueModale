@@ -25,6 +25,7 @@ public class RCarre extends RegleSansBranche {
                 j++;
             }
             a.reagi = tab.getiBranches();
+            return true;
         }
         return false;
     }
