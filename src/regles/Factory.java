@@ -13,6 +13,8 @@ public class Factory {
 		l.add(new RNegDisj());
 		l.add(new RNegImpl());
 		l.add(new RNegConj());
+		l.add(new RNegCarre());
+		l.add(new RCarre());
 		//Ajouter d'autres règles pour les systemes T, KT4, KT45
 		return l;
 	}

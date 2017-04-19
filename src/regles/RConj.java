@@ -1,8 +1,5 @@
 package regles;
 
-import java.util.Iterator;
-import java.util.List;
-
 import demonstrateur.Assertion;
 import demonstrateur.AssertionSat;
 import demonstrateur.Tableau;
@@ -46,7 +43,7 @@ public class RConj extends RegleSansBranche {
 	*/
 	@Override
 	public boolean essayerAppliquer(int i, Tableau tab) {
-		Assertion a = tab.get(i);
+		Assertion a = tab.getAssert(i);
 		if(a instanceof AssertionSat
 		   && ((AssertionSat)a).expr instanceof EtExpr){
 			a.reagi = tab.getiBranches();

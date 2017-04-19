@@ -7,7 +7,7 @@ public class RDisj extends RegleBranche {
 
 	@Override
 	public boolean essayerAppliquerMembre2(int i, Tableau tab) {
-		Assertion a = tab.get(i);
+		Assertion a = tab.getAssert(i);
 		if(a instanceof AssertionSat
 		   && ((AssertionSat)a).expr instanceof OuExpr){
 			tab.branche(i, this, false);
@@ -19,7 +19,7 @@ public class RDisj extends RegleBranche {
 
 	@Override
 	public boolean essayerAppliquer(int i, Tableau tab) {
-		Assertion a = tab.get(i);
+		Assertion a = tab.getAssert(i);
 		if(a instanceof AssertionSat
 		   && ((AssertionSat)a).expr instanceof OuExpr){
 			a.reagi = tab.getiBranches();

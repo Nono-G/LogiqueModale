@@ -120,13 +120,12 @@ public class Parse {
 		ConstrRet cr;
 		switch(c){
 		case '!': //NON
-			e = new NonExpr();
 			cr = constr0(expr, d+1);
-			((Op1Expr)e).membre = cr.e;
+			e = new NonExpr(cr.e);
 			nd = 1+cr.n;
 			break;
 		case '^': // ET
-			e = new EtExpr();
+			e = new EtExpr(null,null);
 			cr = constr0(expr, d+1);
 			((Op2Expr)e).membre1 = cr.e;
 			nd = 1+cr.n;
@@ -135,7 +134,7 @@ public class Parse {
 			nd+= cr.n;
 			break;
 		case '+': //OU
-			e = new OuExpr();
+			e = new OuExpr(null,null);
 			cr = constr0(expr, d+1);
 			((Op2Expr)e).membre1 = cr.e;
 			nd = 1+cr.n;
@@ -144,7 +143,7 @@ public class Parse {
 			nd+= cr.n;
 			break;
 		case '>': //IMPLIQUE
-			e = new ImplExpr();
+			e = new ImplExpr(null,null);
 			cr = constr0(expr, d+1);
 			((Op2Expr)e).membre1 = cr.e;
 			nd = 1+cr.n;
@@ -153,15 +152,13 @@ public class Parse {
 			nd+= cr.n;
 			break;
 		case '#': //CARRE
-			e = new CarreExpr();
 			cr = constr0(expr, d+1);
-			((Op1Expr)e).membre = cr.e;
+			e = new CarreExpr(cr.e);
 			nd = 1+cr.n;
 			break;
 		case '*': //LOSANGE
-			e = new LosangeExpr();
 			cr = constr0(expr, d+1);
-			((Op1Expr)e).membre = cr.e;
+			e = new LosangeExpr(cr.e);
 			nd = 1+cr.n;
 			break;
 		default : //VAR

@@ -61,11 +61,11 @@ public class Tableau {
 		this.iAssert++;
 	}
 	
-	public Assertion get(int i){
+	public Assertion getAssert(int i){
 		if(i<this.iAssert){
 			return this.asserts[i];
 		}else{
-			throw new RuntimeException("Tagleau.get : Assertion hors bornes");
+			throw new RuntimeException("Tagleau.getAssert : Assertion hors bornes");
 		}
 	}
 	

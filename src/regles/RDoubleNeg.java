@@ -1,7 +1,5 @@
 package regles;
 
-import java.util.Iterator;
-import java.util.List;
 import exprs.*;
 import demonstrateur.*;
 
@@ -43,7 +41,7 @@ public class RDoubleNeg extends RegleSansBranche{
 	*/
 	@Override
 	public boolean essayerAppliquer(int i, Tableau tab) {
-		Assertion a = tab.get(i);
+		Assertion a = tab.getAssert(i);
 		if(a instanceof AssertionSat
 			&& ((AssertionSat)a).expr instanceof NonExpr
 			&& ((NonExpr)((AssertionSat)a).expr).membre instanceof NonExpr

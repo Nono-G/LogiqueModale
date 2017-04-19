@@ -9,5 +9,6 @@ public abstract class Expr {
 	public boolean estEtExpr(){return false;}
 	public boolean estImplExpr(){return false;}
 	public boolean estNonExpr(){return false;}
+	public boolean estCarreExpr(){return  false;}
 
 }

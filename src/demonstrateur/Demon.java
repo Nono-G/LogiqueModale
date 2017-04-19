@@ -53,12 +53,12 @@ public class Demon {
 	public static boolean contradiction(Tableau tab, boolean verbeux/*, String message*/){
 		int i = 0;
 		while(i < tab.iAssert){//Parcourir les assertions
-			Assertion a = tab.get(i);
+			Assertion a = tab.getAssert(i);
 			if(a instanceof AssertionSat && ((AssertionSat)a).expr instanceof Var){
 				//a Un littéral positif
 				int j = 0;
 				while(j < tab.iAssert){//Parcourir les assertions pour trouver le littéral negatif
-					Assertion a2 = tab.get(j);
+					Assertion a2 = tab.getAssert(j);
 					if(a2.monde.equals(a.monde) &&
 					   a2 instanceof AssertionSat &&
 					   ((AssertionSat)a2).expr instanceof NonExpr &&
