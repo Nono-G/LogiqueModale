@@ -1,6 +1,7 @@
 package main;
 
 import exprs.*;
+import java.util.List;
 
 public class Parse {
 	
@@ -14,13 +15,15 @@ public class Parse {
 	 * (LOSANGE) *
 	 */
 	public static final char[] operandesStandard = {'!','^','+','>','#','*'};
+	public static final char[] operandes1 = {'!','#','*'};
+	public static final char[] operandes2 = {'^','+','>'};
 	
 	public static Expr parse(String str){
 		return constr(infixeToPrefixe(str, operandesStandard));
 	}
 	
 	public static String infixeToPrefixe(String infixe, char[] operandes){
-		if(! correct(infixe)){
+		if(! syntaxeExprCorrecte(infixe, operandes1, operandes2)){
 			throw new RuntimeException("incorrect");
 		}
 		char[] pref = new char[2*infixe.length()];
@@ -104,7 +107,9 @@ public class Parse {
 		return r;
 	}
 	
-	public static boolean correct(String expr){
+	public static boolean syntaxeExprCorrecte(String expr, char[] op1, char[] op2) {
+		//Vérification de la syntaxe de l'expression expr, on a besoin de différencier les
+		//opérateurs d'arité 2 et les opérateurs d'arité 1, leur sens en revanche n'as pas d'impact
 		return true;
 	}
 	
