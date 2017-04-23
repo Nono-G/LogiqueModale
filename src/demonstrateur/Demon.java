@@ -6,10 +6,26 @@ import exprs.*;
 import regles.*;
 
 public class Demon {
-	
-	public static List<Regle> regles = Factory.getReglesSysK();
-	
-	public static boolean sat(Tableau tab, boolean verbeux){
+
+	public List<Regle> regles;
+	public boolean verbeux;
+
+	public Demon(Systeme sys, boolean verbeux){
+		switch(sys){
+			case K :
+				this.regles = Factory.getReglesSysK();
+				break;
+			case T :
+				this.regles = Factory.getReglesSysT();
+				break;
+			default:
+				throw new RuntimeException("Système non supporté.");
+		}
+		this.verbeux=verbeux;
+	}
+
+	public boolean sat(Tableau tab){
+
 		while( ! tab.termine()){
 			reagirTous(tab,verbeux);
 			//String messageContradiction = new String();
@@ -33,7 +49,7 @@ public class Demon {
 		return true;
 	}
 	
-	public static void reagirTous(Tableau tab, boolean verbeux){
+	public void reagirTous(Tableau tab, boolean verbeux){
 		int i = 0;
 		boolean agi = false;
 		while(i < tab.iAssert){
@@ -50,19 +66,19 @@ public class Demon {
 		//return false;//retour = une règle a agi ou non
 	}
 	
-	public static boolean contradiction(Tableau tab, boolean verbeux/*, String message*/){
+	public boolean contradiction(Tableau tab, boolean verbeux/*, String message*/){
 		int i = 0;
 		while(i < tab.iAssert){//Parcourir les assertions
 			Assertion a = tab.getAssert(i);
-			if(a instanceof AssertionSat && ((AssertionSat)a).expr instanceof Var){
+			if(a.estAssertionSat() && ((AssertionSat)a).expr.estVarExpr()){
 				//a Un littéral positif
 				int j = 0;
 				while(j < tab.iAssert){//Parcourir les assertions pour trouver le littéral negatif
 					Assertion a2 = tab.getAssert(j);
 					if(a2.monde.equals(a.monde) &&
-					   a2 instanceof AssertionSat &&
-					   ((AssertionSat)a2).expr instanceof NonExpr &&
-					   ((NonExpr)((AssertionSat)a2).expr).membre instanceof Var &&
+					   a2.estAssertionSat() &&
+					   ((AssertionSat)a2).expr.estNonExpr() &&
+					   ((NonExpr)((AssertionSat)a2).expr).membre.estVarExpr() &&
 					   ((Var)((NonExpr)((AssertionSat)a2).expr).membre).nom.equals(((Var)((AssertionSat)a).expr).nom)
 					   ){//CONTRADICTION
 						if(verbeux){

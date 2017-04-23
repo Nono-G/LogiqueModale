@@ -10,7 +10,7 @@ public class AssertionSucc extends Assertion {
 	}
 	
 	public String toString(){
-		return this.monde.toString() + " -> " + this.succ.toString();
+		return (this.reagi>0?"R":"_") + " : " + this.monde.toString() + " -> " + this.succ.toString();
 	}
 
 	@Override

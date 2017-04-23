@@ -2,6 +2,7 @@ package main;
 
 import exprs.*;
 import demonstrateur.*;
+import regles.Systeme;
 
 public class Main {
 
@@ -21,14 +22,17 @@ public class Main {
 		//Expr e = Parse.parse("((!(a^b))^(a^b))");
 		//Expr e = Parse.parse("((!(#(a)))^(!(#(!(a)))))");
 		//Expr e = Parse.parse("((!(#(a)))^(#(a)))");
+		Expr e = Parse.parse("((#(a))^(!(#(a))))");
 		//Expr e = Parse.parse("(!((!(b))^(b>a)))");
-		Expr e = Parse.parse("(*(a))");
+		//Expr e = Parse.parse("(!(((#(((!(q))+r)^(s^t)))>(#(#((*((!(q))+r))>(*(s^t))))))))");//EXAM
+		//Expr e = Parse.parse("(*(a))");
 		System.out.println(e);
 		Tableau t = new Tableau();
 		AssertionSat a = new AssertionSat(new Monde(), e);
 		t.ajouter(a);
 		System.out.println(t);
-		boolean sat = Demon.sat(t, true);
+		Demon sysT = new Demon(Systeme.K, true);
+		boolean sat = sysT.sat(t);
 		System.out.println(sat);
 	}
 	

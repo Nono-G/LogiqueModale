@@ -11,5 +11,6 @@ public abstract class Expr {
 	public boolean estNonExpr(){return false;}
 	public boolean estCarreExpr(){return  false;}
 	public boolean estLosangeExpr(){return false;}
+	public boolean estVarExpr(){return false;}
 
 }

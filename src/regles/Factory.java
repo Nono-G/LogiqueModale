@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 public class Factory {
 
-	public static List<Regle> getReglesSysK(){
+	private static List<Regle> getReglesCommunes(){
 		List<Regle> l = new ArrayList<Regle>();
 		l.add(new RDoubleNeg());
 		l.add(new RDisj());
@@ -14,14 +14,25 @@ public class Factory {
 		l.add(new RNegImpl());
 		l.add(new RNegConj());
 		l.add(new RNegCarre());
-		l.add(new RCarre());
 		l.add(new RImpl());
 		l.add(new RLosange());
-		//Ajouter d'autres règles pour les systemes T, KT4, KT45
+		l.add(new RNegLosange());
+		l.add(new RCarreBis());
 		return l;
 	}
 
-	public static List<Regle> getReglesSysT(){return null;}
+	public static List<Regle> getReglesSysK(){
+		List<Regle> l = getReglesCommunes();
+		l.add(new RCarre());
+		return l;
+	}
+
+	public static List<Regle> getReglesSysT(){
+		List<Regle> l = getReglesCommunes();
+		l.add(new RT());
+		return l;
+	}
+
 	public static List<Regle> getReglesSysKT4(){
 		return null;
 	}

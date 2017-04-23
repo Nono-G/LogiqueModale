@@ -89,5 +89,4 @@ public class Tableau {
 	}
 
 	public int getiBranches(){return this.iBranches;}
-	
 }
